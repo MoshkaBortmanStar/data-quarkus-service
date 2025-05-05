@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  data-postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: madara
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: data
+    ports:
+      - "5432:5432"
+    networks:
+      - data-quarkus-network
+
+  data-quarkus-network:
+    build:
+      context: .
+      dockerfile: Dockerfile.jvm
+    ports:
+      - "8080:8080"
+    depends_on:
+      - data-postgres
+    environment:
+      - JAVA_OPTS_APPEND=-Dquarkus.http.host=0.0.0.0
+    networks:
+      - data-quarkus-network
+networks:
+  data-quarkus-network:
+    driver: bridge

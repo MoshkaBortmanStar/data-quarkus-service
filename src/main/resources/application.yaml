@@ -1,0 +1,35 @@
+quarkus:
+  datasource:
+    db-kind: postgresql
+    jdbc:
+      url: jdbc:postgresql://data-postgres:5432/data
+      driver: org.postgresql.Driver
+    username: madara
+    password: admin
+    min-size: 5
+    max-size: 20
+    initial-size: 5
+    max-lifetime: 1800000
+    leak-detection-enabled: true
+    health:
+      enabled: true
+    metrics:
+      enabled: true
+
+  hibernate-orm:
+    enabled: false
+
+  log:
+    level: INFO
+
+  thread-pool:
+    virtual-threads: true
+  http:
+    port: 8080
+
+#quarkus.datasource.db-kind=postgresql
+#quarkus.datasource.username=madara
+#quarkus.datasource.password=admin
+#
+#quarkus.datasource.jdbc.url=jdbc:postgresql://localhost:5432/data
+#quarkus.datasource.jdbc.max-size=16
